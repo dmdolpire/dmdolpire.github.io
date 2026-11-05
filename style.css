@@ -1,0 +1,226 @@
+/*
+  Look and layout for Daniel's page.
+  To recolor the whole page, change the values under :root.
+  The intro and interests are filled in by script.js after login.
+*/
+
+/* Count padding and border as part of an element's width. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #e7eef2;
+  --surface: #ffffff;
+  --text: #1b2832;
+  --muted: #3e5160;
+  --accent: #0e6a7d;
+  --accent-dark: #0b5566;
+  --line: #d3e0e7;
+  --soft: #f4f8fa;
+  --error: #8c1d2c;
+  --error-bg: #fdecee;
+  --shadow: 0 0.75rem 2rem rgba(22, 45, 61, 0.08);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  overflow-wrap: break-word;
+}
+
+/* A centered card. Side margins keep it off the edges of a phone. */
+.page {
+  max-width: 40rem;
+  margin: 1rem auto;
+  padding: 1.5rem 1.25rem 1.75rem;
+  background: var(--surface);
+  border-radius: 0.75rem;
+  border-top: 0.4rem solid var(--accent);
+  box-shadow: var(--shadow);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.85rem, 7vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+}
+
+p {
+  margin: 0;
+}
+
+.lede {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+}
+
+/*
+  The hidden attribute hides a view. Repeat it here so a later
+  display rule cannot show that view by accident.
+*/
+#login[hidden],
+#profile[hidden],
+#logout[hidden],
+#login-message[hidden],
+#content-message[hidden],
+#interests-section[hidden] {
+  display: none;
+}
+
+header {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Name on the left, Log out on the right. On a narrow screen they wrap. */
+.title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+/* The about text comes from the database. Space out more than one paragraph. */
+#about {
+  color: var(--muted);
+}
+
+#about p + p {
+  margin-top: 0.75rem;
+}
+
+/* A plain list, drawn as soft rows. list-style removes the default bullets. */
+.interests {
+  margin-top: 1.75rem;
+}
+
+/* If there is no intro, don't leave a gap above the list. */
+#about:empty + .interests {
+  margin-top: 0;
+}
+
+.interests ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.interests li {
+  padding: 0.75rem 1rem;
+  background: var(--soft);
+  border-radius: 0.5rem;
+}
+
+footer {
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* 1rem (usually 16px) or larger, so phones do not zoom in on the field. */
+input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid #b7c8d2;
+  border-radius: 0.5rem;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.button-primary {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.75rem 1rem;
+  color: #ffffff;
+  background: var(--accent);
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.button-primary:hover {
+  background: var(--accent-dark);
+}
+
+.button-primary:disabled,
+.button-secondary:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.button-secondary {
+  padding: 0.4rem 0.75rem;
+  color: var(--accent-dark);
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
+}
+
+.button-secondary:hover {
+  background: var(--soft);
+}
+
+.message {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--error);
+  background: var(--error-bg);
+  border-radius: 0.5rem;
+}
+
+/* Same box for a note that is not an error, such as "Loading…". */
+.message.info {
+  color: var(--muted);
+  background: var(--soft);
+}
+
+/* A bit more space around the card on a wider screen. */
+@media (min-width: 40rem) {
+  .page {
+    margin: 3rem auto;
+    padding: 2.25rem 2.25rem 2.5rem;
+  }
+}

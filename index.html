@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- charset: read the text as UTF-8. viewport: fit the layout to a phone screen. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daniel Dolpire</title>
+  <meta name="description" content="Daniel Dolpire">
+  <!-- Colors, spacing, and layout live in style.css. -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <!-- The name stays visible before and after login. -->
+    <header>
+      <div class="title-row">
+        <h1>Daniel Dolpire</h1>
+        <!-- A button, not a link, because logout stays on this page. Hidden until signed in. -->
+        <button class="button-secondary" id="logout" type="button" hidden>Log out</button>
+      </div>
+    </header>
+
+    <!--
+      Sign-in form. Shown when there is no saved session.
+      Email and password are checked by Supabase Auth. There is no sign-up form.
+    -->
+    <div id="login">
+      <h2>Log in</h2>
+      <p class="lede">Enter your email and password to continue.</p>
+
+      <!-- method="post" keeps the password out of the address bar if JavaScript is off. -->
+      <form id="login-form" method="post">
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <!-- script.js writes a short message here when sign-in fails. -->
+        <p id="login-message" class="message" role="alert" hidden></p>
+        <button class="button-primary" id="login-button" type="submit">Log in</button>
+      </form>
+      <noscript>
+        <p class="message">Turn on JavaScript to sign in and load this page.</p>
+      </noscript>
+    </div>
+
+    <!--
+      Filled in after sign-in from the site_content table.
+      The intro and interests are not written in this file.
+    -->
+    <main id="profile" hidden>
+      <p id="content-message" class="message" role="status" hidden></p>
+      <div id="about"></div>
+      <section class="interests" id="interests-section" hidden>
+        <h2>Interests</h2>
+        <ul id="interests"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Thanks for visiting.</p>
+    </footer>
+  </div>
+
+  <!--
+    Supabase's browser library, loaded from a CDN so there is no build step.
+    script.js is last so the HTML above and this library both exist.
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
